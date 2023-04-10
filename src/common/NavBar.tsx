@@ -9,11 +9,18 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export const NavBar: React.FC<{}> = () => {
+  const navigate = useNavigate() 
+  
+  //ruta hacia login
+  const navigateLogin= ()=> {
+    navigate('login')
+  }
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="fixed">
+      <AppBar position="sticky">
         <Toolbar>
           <Container maxWidth="xl">
             <Grid
@@ -27,7 +34,7 @@ export const NavBar: React.FC<{}> = () => {
               </Grid>
               <Grid item>
                 <Stack spacing={2} direction="row">
-                  <Button variant="outlined">Login</Button>
+                  <Button variant="outlined" onClick={navigateLogin}>Login</Button>
                   <Button variant="outlined">Register</Button>
                 </Stack>
               </Grid>
@@ -38,3 +45,7 @@ export const NavBar: React.FC<{}> = () => {
     </Box>
   );
 };
+function userNavigate() {
+  throw new Error("Function not implemented.");
+}
+
