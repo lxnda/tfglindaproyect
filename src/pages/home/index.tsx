@@ -1,11 +1,18 @@
-import React from 'react'
+import React from "react";
+import { useNotification } from "../../context/notification.context";
+import { Button, Container } from "@mui/material";
 
-type Props = {}
-
-const HomePage = (props: Props) => {
+export const HomePage: React.FC<{}> = () => {
+  const {getError} = useNotification();
+  const handleClick = () => {
+    getError("hola error");
+  };
   return (
-    <div>HomePage</div>
-  )
-}
-
-export default HomePage
+    <Container sx={{ mt: 9 }} maxWidth="xl">
+      <Button  onClick={handleClick} fullWidth variant="contained">
+        estamos en home
+      </Button>
+    </Container>
+  );
+};
+export default HomePage;
