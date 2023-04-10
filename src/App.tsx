@@ -1,18 +1,12 @@
-import React from "react";
-import logo from "./logo.svg";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import MainLayout from "./components/layout/MainLayout";
-import HomePage from "./pages/home/HomePage";
-import { routes } from "./routes";
+import { Button, Container } from "@mui/material";
+import { NavBar } from "./common/NavBar";
+import { BrowserRouter } from "react-router-dom";
+import { AppRouter } from "./router";
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<MainLayout />}>
-            {routes}
-        </Route>
-      </Routes>
+      <AppRouter />
     </BrowserRouter>
   );
 }

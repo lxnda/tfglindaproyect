@@ -2,15 +2,16 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { CssBaseline } from "@mui/material";
-import { Provider } from "react-redux";
+import { ThemeConfig } from "./config/theme.config";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-      <App />
+      <ThemeConfig>
+        <App />
+      </ThemeConfig>
   </React.StrictMode>
 );
 
