@@ -56,7 +56,18 @@ const theme = createTheme({
         },
       },
     },
+    MuiListItemButton:{
+      defaultProps:{
+        style: {
+          textTransform: "none",
+          boxShadow: "none",
+          borderRadius: "0.5em",
+        },
+      },
+      
+    },
   },
+  
 });
 
 export const ThemeConfig: React.FC<ThemeProp> = ({ children }) => {

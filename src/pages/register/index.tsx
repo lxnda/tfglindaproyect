@@ -1,7 +1,10 @@
 import {
   Box,
   Button,
+  Checkbox,
   Container,
+  FormControlLabel,
+  FormGroup,
   Grid,
   Link,
   Paper,
@@ -12,18 +15,28 @@ import {
 import React from "react";
 import { useNotification } from "../../context/notification.context";
 import { LoginValidate } from "../../utils/validateForms";
-import { BrowserRouter } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 
 type LoginType = {
   username: string;
   password: string;
+  nameuser: string;
+  lastname: string;
 };
 
-export const LoginPage: React.FC<{}> = () => {
+export const RegisterPage: React.FC<{}> = () => {
+  //ruta hacia register
+  const navigate = useNavigate();
 
+  const navigateLogin = () => {
+    navigate("LoginPage");
+  };
   const { getError, getSuccess } = useNotification();
   const [loginData, setLoginData] = React.useState<LoginType>({
     username: "",
+    nameuser: "",
+    lastname: "",
     password: "",
   });
 
@@ -55,7 +68,7 @@ export const LoginPage: React.FC<{}> = () => {
           <Paper sx={{ padding: "1.2em", borderRadius: "0.5em" }}>
             <Typography sx={{ mt: 1, mb: 1 }} variant="h4">
               {" "}
-              Iniciar sesion{" "}
+              Crear Cuenta{" "}
             </Typography>
             <Box component="form" onSubmit={handleSubmit}>
               <TextField
@@ -67,6 +80,31 @@ export const LoginPage: React.FC<{}> = () => {
                 sx={{ mt: 2, mb: 1.5 }}
                 onChange={dataLogin}
               />
+              <Grid container direction="row" justifyContent="space-beetwen">
+                <Grid item>
+                  <TextField
+                    name="nameuser"
+                    margin="normal"
+                    fullWidth
+                    label="Nombre"
+                    type="text"
+                    sx={{ mt: 2, mb: 1.5 }}
+                    onChange={dataLogin}
+                  />
+                </Grid>
+                <Grid item>
+                  <TextField
+                    name="lastname"
+                    margin="normal"
+                    fullWidth
+                    label="Apellidos"
+                    type="text"
+                    sx={{ mt: 2, mb: 1.5 }}
+                    onChange={dataLogin}
+                  />
+                </Grid>
+              </Grid>
+
               <TextField
                 name="password"
                 margin="normal"
@@ -76,28 +114,23 @@ export const LoginPage: React.FC<{}> = () => {
                 sx={{ mt: 1.5, mb: 1.5 }}
                 onChange={dataLogin}
               />
+              <FormGroup>
+                <FormControlLabel
+                  control={<Checkbox defaultChecked />}
+                  label="Aceptas los terminos de privacidad etc.."
+                />
+              </FormGroup>
               <Button
                 fullWidth
                 variant="outlined"
                 type="submit"
                 sx={{ mt: 1.5, mb: 3 }}
               >
-                Iniciar sesion
+                Crear cuenta
               </Button>
-              <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
-                <Grid item>
-                  <BrowserRouter></BrowserRouter>
-
-                  <Link href="" variant="body2" >
-                    {"Don't have an account? Sign Up"}
-                  </Link>
-                </Grid>
-              </Grid>
+              <Link href="" variant="body2" onClick={navigateLogin}>
+                {"have an account? Sign In"}
+              </Link>
             </Box>
           </Paper>
         </Grid>

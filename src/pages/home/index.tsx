@@ -2,6 +2,7 @@ import React from "react";
 import { useNotification } from "../../context/notification.context";
 import { Button, Container } from "@mui/material";
 import { HeaderComponent } from "../../components";
+import { Menu } from "../menu";
 
 export const HomePage: React.FC<{}> = () => {
   const { getError } = useNotification();
@@ -13,8 +14,8 @@ export const HomePage: React.FC<{}> = () => {
       <HeaderComponent
         title="about moving"
         description="Bienvenido a mi pag"
-        element={<Button>Hola mundo</Button>}
-      />
+        element={<Button>Hola mundo</Button>}/>
+          <Menu/>
     </Container>
   );
 };
