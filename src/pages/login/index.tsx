@@ -12,7 +12,7 @@ import {
 import React from "react";
 import { useNotification } from "../../context/notification.context";
 import { LoginValidate } from "../../utils/validateForms";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, NavLink } from "react-router-dom";
 
 type LoginType = {
   username: string;
@@ -20,7 +20,6 @@ type LoginType = {
 };
 
 export const LoginPage: React.FC<{}> = () => {
-
   const { getError, getSuccess } = useNotification();
   const [loginData, setLoginData] = React.useState<LoginType>({
     username: "",
@@ -43,65 +42,62 @@ export const LoginPage: React.FC<{}> = () => {
   };
 
   return (
-    <Container maxWidth="sm">
-      <Grid
-        container
-        direction="column"
-        alignItems="center"
-        justifyContent="center"
-        sx={{ minHeight: "100vh" }}
-      >
-        <Grid item>
-          <Paper sx={{ padding: "1.2em", borderRadius: "0.5em" }}>
-            <Typography sx={{ mt: 1, mb: 1 }} variant="h4">
-              {" "}
-              Iniciar sesion{" "}
-            </Typography>
-            <Box component="form" onSubmit={handleSubmit}>
-              <TextField
-                name="username"
-                margin="normal"
-                fullWidth
-                label="Email"
-                type="text"
-                sx={{ mt: 2, mb: 1.5 }}
-                onChange={dataLogin}
-              />
-              <TextField
-                name="password"
-                margin="normal"
-                fullWidth
-                type="password"
-                label="Password"
-                sx={{ mt: 1.5, mb: 1.5 }}
-                onChange={dataLogin}
-              />
-              <Button
-                fullWidth
-                variant="outlined"
-                type="submit"
-                sx={{ mt: 1.5, mb: 3 }}
-              >
-                Iniciar sesion
-              </Button>
-              <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
-                <Grid item>
-                  <BrowserRouter></BrowserRouter>
-
-                  <Link href="" variant="body2" >
+    <Grid
+      container
+      direction="column"
+      alignItems="center"
+      justifyContent="center"
+      sx={{ minHeight: "100vh" }}
+    >
+      <Grid item>
+        <Paper sx={{ padding: "1.2em", borderRadius: "0.5em" }}>
+          <Typography sx={{ mt: 1, mb: 1 }} variant="h4">
+            Iniciar sesion
+          </Typography>
+          <Box component="form" onSubmit={handleSubmit}>
+            <TextField
+              name="username"
+              margin="normal"
+              fullWidth
+              label="Email"
+              type="text"
+              sx={{ mt: 2, mb: 1.5 }}
+              onChange={dataLogin}
+            />
+            <TextField
+              name="password"
+              margin="normal"
+              fullWidth
+              type="password"
+              label="Password"
+              sx={{ mt: 1.5, mb: 1.5 }}
+              onChange={dataLogin}
+            />
+            <Button
+              fullWidth
+              variant="outlined"
+              type="submit"
+              sx={{ mt: 1.5, mb: 3 }}
+            >
+              Iniciar sesion
+            </Button>
+            <Grid container>
+              <Grid item xs>
+                <Link href="#" variant="body2">
+                  Forgot password?
+                </Link>
+              </Grid>
+              <Grid item>
+                <NavLink to="/register">
+                  <Link variant="body2">
                     {"Don't have an account? Sign Up"}
                   </Link>
-                </Grid>
+                </NavLink>
               </Grid>
-            </Box>
-          </Paper>
-        </Grid>
+            </Grid>
+          </Box>
+        </Paper>
       </Grid>
-    </Container>
+    </Grid>
   );
 };

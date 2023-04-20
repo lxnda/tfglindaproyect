@@ -127,7 +127,7 @@ export const Menu: React.FC<{}> = () => {
       </AppBar>
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
-        <Avatar variant="square" src={Logo} sizes=""/>
+          <Avatar variant="square" src={Logo} sizes="" />
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === "rtl" ? (
               <ChevronRightIcon />
@@ -135,9 +135,6 @@ export const Menu: React.FC<{}> = () => {
               <ChevronLeftIcon />
             )}
           </IconButton>
-        
-           
-          
         </DrawerHeader>
         <Divider />
         <List>
