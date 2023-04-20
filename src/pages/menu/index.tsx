@@ -148,7 +148,7 @@ export const Menu: React.FC<{}> = () => {
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
-        <Typography paragraph>algo. contenido dashboard</Typography>
+        {/* <Typography paragraph>algo. contenido dashboard</Typography> */}
       </Box>
     </Box>
   );
