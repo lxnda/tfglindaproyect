@@ -18,8 +18,9 @@ import TodayIcon from "@mui/icons-material/Today";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import * as React from "react";
-import { Avatar, ListItemAvatar } from "@mui/material";
+import { Avatar } from "@mui/material";
 import Logo from "../../assets/images/Logo.png";
+import MenuUser from "./menuUser";
 
 const drawerWidth = 240;
 
@@ -145,6 +146,7 @@ export const Menu: React.FC<{}> = () => {
           <Item text="Facturas" icon={<ReceiptIcon />} open={open} />
         </List>
         <Divider />
+        <MenuUser open={open}/>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
