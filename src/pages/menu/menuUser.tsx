@@ -61,7 +61,6 @@ function MenuUser({ open }: Props) {
           Usuario
             <ArrowDropUpIcon
               sx={{
-                mr:10,
                 fontSize: 20,
                 color: "white",
               }}

@@ -21,6 +21,9 @@ import * as React from "react";
 import { Avatar } from "@mui/material";
 import Logo from "../../assets/images/Logo.png";
 import MenuUser from "./menuUser";
+import HomePage from "../home";
+import Content from "../../components/Content";
+import { HeaderComponent } from "../../components";
 
 const drawerWidth = 240;
 
@@ -140,17 +143,18 @@ export const Menu: React.FC<{}> = () => {
         <Divider />
         <List>
           <Item text="Home" icon={<HomeIcon />} open={open} />
-          <Item text="Clientes1" icon={<PeopleAltIcon />} open={open} />
+          <Item text="Clientes" icon={<PeopleAltIcon />} open={open} />
           <Item text="Mudanzas" icon={<LocalShippingIcon />} open={open} />
           <Item text="Calendario" icon={<TodayIcon />} open={open} />
           <Item text="Facturas" icon={<ReceiptIcon />} open={open} />
         </List>
         <Divider />
-        <MenuUser open={open}/>
+        <MenuUser open={open} />
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <Box component="main" sx={{ flexGrow: 1,p:2.5,overflow: 'hidden' }}>
         <DrawerHeader />
-        {/* <Typography paragraph>algo. contenido dashboard</Typography> */}
+        <HeaderComponent title="Mudanzas Proximas" />
+        <Content />
       </Box>
     </Box>
   );
