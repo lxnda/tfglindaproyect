@@ -4,19 +4,21 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  makeStyles,
 } from "@mui/material";
 import { SvgIconProps } from "@mui/material/SvgIcon";
+import { Link } from "react-router-dom";
 
 interface Props {
   text: string;
   icon?: React.ReactElement<SvgIconProps>;
   open?: boolean;
+  To: string;
 }
 
-function Item({ text, icon, open }: Props) {
+function Item({ text, icon, open,To }: Props) {
+
   return (
-    <ListItem>
+    <ListItem>                                         
       <ListItemButton
         sx={{
           "&:hover": {
@@ -26,7 +28,7 @@ function Item({ text, icon, open }: Props) {
           minHeight: 48,
           justifyContent: open ? "initial" : "center",
           px: 2.5,
-        }}
+        }} component={Link} to={To}
       >
         {icon && (
           <ListItemIcon

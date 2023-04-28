@@ -21,9 +21,8 @@ import * as React from "react";
 import { Avatar } from "@mui/material";
 import Logo from "../../assets/images/Logo.png";
 import MenuUser from "./menuUser";
-import HomePage from "../home";
-import Content from "../../components/Content";
-import { HeaderComponent } from "../../components";
+import { HeaderComponent } from "..";
+import Menuhome from "../../pages/menu/home";
 
 const drawerWidth = 240;
 
@@ -142,11 +141,11 @@ export const Menu: React.FC<{}> = () => {
         </DrawerHeader>
         <Divider />
         <List>
-          <Item text="Home" icon={<HomeIcon />} open={open} />
-          <Item text="Clientes" icon={<PeopleAltIcon />} open={open} />
-          <Item text="Mudanzas" icon={<LocalShippingIcon />} open={open} />
-          <Item text="Calendario" icon={<TodayIcon />} open={open} />
-          <Item text="Facturas" icon={<ReceiptIcon />} open={open} />
+          <Item text="Home" icon={<HomeIcon />} open={open} To="../home"/>
+          <Item text="Clientes" icon={<PeopleAltIcon />} open={open} To="../home"/>
+          <Item text="Mudanzas" icon={<LocalShippingIcon />} open={open} To="../home"/>
+          <Item text="Calendario" icon={<TodayIcon />} open={open} To="../home"/>
+          <Item text="Facturas" icon={<ReceiptIcon />} open={open} To="../home"/>
         </List>
         <Divider />
         <MenuUser open={open} />
@@ -154,7 +153,7 @@ export const Menu: React.FC<{}> = () => {
       <Box component="main" sx={{ flexGrow: 1,p:2.5,overflow: 'hidden' }}>
         <DrawerHeader />
         <HeaderComponent title="Mudanzas Proximas" />
-        <Content />
+        <Menuhome></Menuhome>
       </Box>
     </Box>
   );
