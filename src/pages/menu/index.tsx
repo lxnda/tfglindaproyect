@@ -135,14 +135,11 @@ export const Menu: React.FC<{}> = () => {
               <ChevronLeftIcon />
             )}
           </IconButton>
-        
-           
-          
         </DrawerHeader>
         <Divider />
         <List>
           <Item text="Home" icon={<HomeIcon />} open={open} />
-          <Item text="Clientes1" icon={<PeopleAltIcon />} open={open} />
+          <Item text="Clientes" icon={<PeopleAltIcon />} open={open} />
           <Item text="Mudanzas" icon={<LocalShippingIcon />} open={open} />
           <Item text="Calendario" icon={<TodayIcon />} open={open} />
           <Item text="Facturas" icon={<ReceiptIcon />} open={open} />
