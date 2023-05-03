@@ -1,11 +1,12 @@
 import { Outlet } from "react-router-dom";
-import { NavBar } from "./NavBar";
 import React from "react";
+import { Menu } from "../components/Menu";
 
 export const RouterLayout: React.FC<{}> = () => {
   return (
     <>
-      <NavBar />
+    {/* MUESTRA EL MENU CON EL DASHBOARD */}
+      <Menu />
       <Outlet />
     </>
   );

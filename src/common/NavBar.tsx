@@ -16,7 +16,7 @@ export const NavBar: React.FC<{}> = () => {
   
   //ruta hacia login
   const navigateLogin= ()=> {
-    navigate('login')
+    navigate('/login')
   }
   return (
     <Box sx={{ flexGrow: 1 }}>

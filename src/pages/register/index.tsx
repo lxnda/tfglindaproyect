@@ -15,8 +15,7 @@ import {
 import React from "react";
 import { useNotification } from "../../context/notification.context";
 import { LoginValidate } from "../../utils/validateForms";
-import { useNavigate } from "react-router-dom";
-
+import { NavLink, useNavigate } from "react-router-dom";
 
 type LoginType = {
   username: string;
@@ -26,12 +25,6 @@ type LoginType = {
 };
 
 export const RegisterPage: React.FC<{}> = () => {
-  //ruta hacia register
-  const navigate = useNavigate();
-
-  const navigateLogin = () => {
-    navigate("LoginPage");
-  };
   const { getError, getSuccess } = useNotification();
   const [loginData, setLoginData] = React.useState<LoginType>({
     username: "",
@@ -128,9 +121,9 @@ export const RegisterPage: React.FC<{}> = () => {
               >
                 Crear cuenta
               </Button>
-              <Link href="" variant="body2" onClick={navigateLogin}>
-                {"have an account? Sign In"}
-              </Link>
+              <NavLink to="/">
+                <Link variant="body2">{"have an account? Sign In"}</Link>
+              </NavLink>
             </Box>
           </Paper>
         </Grid>
