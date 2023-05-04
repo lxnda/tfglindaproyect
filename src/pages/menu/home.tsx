@@ -39,7 +39,7 @@ const rows = [
   },
   {
     id: 4,
-    lastName: "Stark",
+    lastName: "Stark nuvo",
     firstName: "Arya",
     descripcion: "mudanza pequeña una cama, mesas",
     date: "03/06/2023",
