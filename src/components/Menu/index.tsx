@@ -141,7 +141,7 @@ export const Menu: React.FC<{}> = () => {
         </DrawerHeader>
         <Divider />
         <List>
-          <Item text="Home" icon={<HomeIcon />} open={open} To="../home"/>
+          <Item text="Home" icon={<HomeIcon />} open={open} To="../pages/Dashboard/HomeDashboard"/>
           <Item text="Clientes" icon={<PeopleAltIcon />} open={open} To="../home"/>
           <Item text="Mudanzas" icon={<LocalShippingIcon />} open={open} To="../home"/>
           <Item text="Calendario" icon={<TodayIcon />} open={open} To="../home"/>
@@ -150,11 +150,12 @@ export const Menu: React.FC<{}> = () => {
         <Divider />
         <MenuUser open={open} />
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1,p:2.5,overflow: 'hidden' }}>
-        <DrawerHeader />
+      <DrawerHeader />
+      {/* <Box component="main" sx={{ flexGrow: 1,p:2.5,overflow: 'hidden' }}>
+        
         <HeaderComponent title="Mudanzas Proximas" />
         <Menuhome></Menuhome>
-      </Box>
+      </Box> */}
     </Box>
   );
 };
