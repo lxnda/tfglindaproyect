@@ -153,6 +153,7 @@ export const Menu: React.FC<{}> = () => {
       <Box component="main" sx={{ flexGrow: 1,p:2.5,overflow: 'hidden' }}>
         <DrawerHeader />
         <HeaderComponent title="Mudanzas Proximas" />
+        
         <Menuhome></Menuhome>
       </Box>
     </Box>
