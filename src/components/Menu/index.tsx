@@ -150,11 +150,11 @@ export const Menu: React.FC<{}> = () => {
         <Divider />
         <MenuUser open={open} />
       </Drawer>
+      <DrawerHeader />
       <Box component="main" sx={{ flexGrow: 1,p:2.5,overflow: 'hidden' }}>
-        <DrawerHeader />
         <HeaderComponent title="Mudanzas Proximas" />
-        
-        <Menuhome></Menuhome>
+
+        <Menuhome></Menuhome> 
       </Box>
     </Box>
   );

@@ -3,11 +3,12 @@ import Fullcalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
+import { Container } from "@mui/material";
 
-const Calendar: React.FC = () => {
+export const Calendar: React.FC = () => {
     return(
-        <div>
-            <Fullcalendar
+        <Container>
+           <Fullcalendar
                 plugins= {[dayGridPlugin,timeGridPlugin,interactionPlugin]}
                 initialView = {"dayGridMonth"}
                 headerToolbar ={{
@@ -16,8 +17,8 @@ const Calendar: React.FC = () => {
                     end:"dayGridMonth, timeGridWeek, timeGridDay"
                 }}
                 height= {"90vh"}
-            />
-        </div>
+            /> 
+        </Container>
+        
     );
 }
-export default Calendar;
