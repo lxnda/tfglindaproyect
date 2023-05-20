@@ -151,11 +151,11 @@ export const Menu: React.FC<{}> = () => {
         <MenuUser open={open} />
       </Drawer>
       <DrawerHeader />
-      {/* <Box component="main" sx={{ flexGrow: 1,p:2.5,overflow: 'hidden' }}>
-        
+      <Box component="main" sx={{ flexGrow: 1,p:2.5,overflow: 'hidden' }}>
         <HeaderComponent title="Mudanzas Proximas" />
-        <Menuhome></Menuhome>
-      </Box> */}
+
+        <Menuhome></Menuhome> 
+      </Box>
     </Box>
   );
 };
