@@ -10,8 +10,11 @@
     "@fullcalendar/interaction": "^6.1.7",
     "@fullcalendar/react": "^6.1.7",
     "@fullcalendar/timegrid": "^6.1.7",
+    "@material-ui/core": "^4.12.4",
     "@mui/icons-material": "^5.11.16",
+    "@mui/lab": "^5.0.0-alpha.130",
     "@mui/material": "^5.11.16",
+    "@mui/styles": "^5.13.1",
     "@mui/x-data-grid": "^6.2.1",
     "@reduxjs/toolkit": "^1.9.3",
     "@testing-library/jest-dom": "^5.14.1",
@@ -22,6 +25,8 @@
     "@types/node": "^16.7.13",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
+    "material-table": "^2.0.3",
+    "mui-datatables": "^4.3.0",
     "package.json": "^2.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -57,6 +62,7 @@
     ]
   },
   "devDependencies": {
-    "@mui/x-data-grid-generator": "^6.3.0"
+    "@mui/x-data-grid-generator": "^6.3.0",
+    "@types/mui-datatables": "^4.3.4"
   }
 }
