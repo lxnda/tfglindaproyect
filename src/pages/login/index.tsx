@@ -9,37 +9,73 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNotification } from "../../context/notification.context";
 import { LoginValidate } from "../../utils/validateForms";
 import { BrowserRouter, NavLink } from "react-router-dom";
+import axios from "axios";
+
 
 type LoginType = {
-  username: string;
-  password: string;
+  email: string;
+  contrasena: string;
 };
+type Idtype = {
+  idEmp: number;
+};
+
+const URLApi = "http://127.0.0.1:6001/getUser";
 
 export const LoginPage: React.FC<{}> = () => {
   const { getError, getSuccess } = useNotification();
   const [loginData, setLoginData] = React.useState<LoginType>({
-    username: "",
-    password: "",
+    email: "",
+    contrasena: "",
   });
 
-  const dataLogin = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLoginData({ ...loginData, [e.target.name]: e.target.value });
+  const handlechange=(e: { target: { name: any; value: any; }; })=>{
+    const {name,value}=e.target;
+    setLoginData(prevState=>({
+      ...prevState,
+      [name]:value
+    }));
+    console.log(loginData);
   };
+  
+  //obtener idempresa
+  const [idEmp, setIdEmp] = React.useState<Idtype>({
+    idEmp: 0
+  })
+  const peticionesPost = async () => {
+    await axios
+      .post(URLApi,{email:loginData.email})
+      .then((response) => {
+        setIdEmp(response.data);
+        
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  console.log(idEmp);
+  //guardar la id de la empresa en localstorage
 
   const handleSubmit = (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault();
     LoginValidate.validate(loginData)
       .then(() => {
-        getSuccess(JSON.stringify(loginData));
+        getSuccess(JSON.stringify("validado"));
+        peticionesPost();
       })
       .catch((error) => {
         getError(error.message);
       });
   };
+
+
+
+
 
   return (
     <Grid
@@ -56,28 +92,29 @@ export const LoginPage: React.FC<{}> = () => {
           </Typography>
           <Box component="form" onSubmit={handleSubmit}>
             <TextField
-              name="username"
+              name="email"
               margin="normal"
               fullWidth
               label="Email"
               type="text"
               sx={{ mt: 2, mb: 1.5 }}
-              onChange={dataLogin}
+              onChange={handlechange}
             />
             <TextField
-              name="password"
+              name="contrasena"
               margin="normal"
               fullWidth
               type="password"
               label="Password"
               sx={{ mt: 1.5, mb: 1.5 }}
-              onChange={dataLogin}
+              onChange={handlechange}
             />
             <Button
               fullWidth
               variant="outlined"
               type="submit"
               sx={{ mt: 1.5, mb: 3 }}
+              onClick={()=> peticionesPost( )}
             >
               Iniciar sesion
             </Button>

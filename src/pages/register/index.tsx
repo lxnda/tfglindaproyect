@@ -16,37 +16,59 @@ import React from "react";
 import { useNotification } from "../../context/notification.context";
 import { LoginValidate } from "../../utils/validateForms";
 import { NavLink, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 type LoginType = {
-  username: string;
-  password: string;
-  nameuser: string;
-  lastname: string;
+  email: string;
+  nombre: string;
+  direccion: string;
+  telefono: number;
+  contrasena: string;
 };
+
+const URLApi = "http://127.0.0.1:6001/addUser";
 
 export const RegisterPage: React.FC<{}> = () => {
   const { getError, getSuccess } = useNotification();
   const [loginData, setLoginData] = React.useState<LoginType>({
-    username: "",
-    nameuser: "",
-    lastname: "",
-    password: "",
+    email: "",
+    nombre: "",
+    direccion: "",
+    telefono: 0,
+    contrasena: "",
   });
 
-  const dataLogin = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLoginData({ ...loginData, [e.target.name]: e.target.value });
-  };
+  const handlechange=(e: { target: { name: any; value: any; }; })=>{
+    const {name,value}=e.target;
+    setLoginData(prevState=>({
+      ...prevState,
+      [name]:value
+    }));
+    console.log(loginData);
+  }
 
   const handleSubmit = (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault();
     LoginValidate.validate(loginData)
       .then(() => {
-        getSuccess(JSON.stringify(loginData));
+        getSuccess(JSON.stringify("Usuario validado"));
       })
       .catch((error) => {
         getError(error.message);
       });
   };
+
+  //enviar los datos 
+  const peticionesPost = async () => {
+    await axios.post(URLApi, loginData)
+      .then(response=>(
+        console.log(response)
+      ))
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
 
   return (
     <Container maxWidth="sm">
@@ -60,52 +82,63 @@ export const RegisterPage: React.FC<{}> = () => {
         <Grid item>
           <Paper sx={{ padding: "1.2em", borderRadius: "0.5em" }}>
             <Typography sx={{ mt: 1, mb: 1 }} variant="h4">
-              {" "}
-              Crear Cuenta{" "}
+              
+              Crear Cuenta
             </Typography>
             <Box component="form" onSubmit={handleSubmit}>
               <TextField
-                name="username"
+                name="email"
                 margin="normal"
                 fullWidth
-                label="Email"
+                label="Correo"
                 type="text"
                 sx={{ mt: 2, mb: 1.5 }}
-                onChange={dataLogin}
+                onChange={handlechange}
               />
               <Grid container direction="row" justifyContent="space-beetwen">
                 <Grid item>
                   <TextField
-                    name="nameuser"
+                    name="nombre"
                     margin="normal"
                     fullWidth
-                    label="Nombre"
+                    label="Nombre Empresa"
                     type="text"
                     sx={{ mt: 2, mb: 1.5 }}
-                    onChange={dataLogin}
+                    onChange={handlechange}
                   />
                 </Grid>
                 <Grid item>
                   <TextField
-                    name="lastname"
+                    name="direccion"
                     margin="normal"
                     fullWidth
-                    label="Apellidos"
+                    label="Direccion"
                     type="text"
                     sx={{ mt: 2, mb: 1.5 }}
-                    onChange={dataLogin}
+                    onChange={handlechange}
                   />
                 </Grid>
+                
               </Grid>
-
+              <Grid item>
+                  <TextField
+                    name="telefono"
+                    margin="normal"
+                    fullWidth
+                    label="Telefono"
+                    type="phone"
+                    sx={{ mt: 2, mb: 1.5 }}
+                    onChange={handlechange}
+                  />
+                </Grid>
               <TextField
-                name="password"
+                name="contrasena"
                 margin="normal"
                 fullWidth
                 type="password"
-                label="Password"
+                label="Constraseña"
                 sx={{ mt: 1.5, mb: 1.5 }}
-                onChange={dataLogin}
+                onChange={handlechange}
               />
               <FormGroup>
                 <FormControlLabel
@@ -118,6 +151,7 @@ export const RegisterPage: React.FC<{}> = () => {
                 variant="outlined"
                 type="submit"
                 sx={{ mt: 1.5, mb: 3 }}
+                onClick={()=> peticionesPost()}
               >
                 Crear cuenta
               </Button>
