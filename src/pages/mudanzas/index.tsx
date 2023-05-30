@@ -40,7 +40,7 @@ const URLApi = "http://127.0.0.1:6001/getMudanzas";
 const id_empresa = 1; // Ajusta el valor
 
 export const Mudanzas: React.FC = () => {
-  //traer los datos con get
+  //traer los datos con get.
   const [data, setData] = useState([]);
   const peticionesGet = async () => {
     await axios
