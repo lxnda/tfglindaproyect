@@ -14,7 +14,10 @@ import { useNotification } from "../../context/notification.context";
 import { LoginValidate } from "../../utils/validateForms";
 import { BrowserRouter, NavLink } from "react-router-dom";
 import axios from "axios";
-
+import { useNavigate } from "react-router-dom";
+import ReactPlayer from "react-player";
+import zIndex from "@mui/material/styles/zIndex";
+import "./Player.css";
 
 type LoginType = {
   email: string;
@@ -24,7 +27,12 @@ type Idtype = {
   idEmp: number;
 };
 
+type Validatetype = {
+  validate: boolean;
+};
+
 const URLApi = "http://127.0.0.1:6001/getUser";
+const URLApivalidate = "http://127.0.0.1:6001/verificarUser";
 
 export const LoginPage: React.FC<{}> = () => {
   const { getError, getSuccess } = useNotification();
@@ -33,39 +41,38 @@ export const LoginPage: React.FC<{}> = () => {
     contrasena: "",
   });
 
-  const handlechange=(e: { target: { name: any; value: any; }; })=>{
-    const {name,value}=e.target;
-    setLoginData(prevState=>({
+  const handlechange = (e: { target: { name: any; value: any } }) => {
+    const { name, value } = e.target;
+    setLoginData((prevState) => ({
       ...prevState,
-      [name]:value
+      [name]: value,
     }));
     console.log(loginData);
   };
-  
+
   //obtener idempresa
   const [idEmp, setIdEmp] = React.useState<Idtype>({
-    idEmp: 0
-  })
+    idEmp: 0,
+  });
+
   const peticionesPost = async () => {
     await axios
-      .post(URLApi,{email:loginData.email})
+      .post(URLApi, { email: loginData.email })
       .then((response) => {
-        setIdEmp(response.data);
-        
+        setIdEmp(response.data.id);
+        if (response.data.id != 0) {
+          localStorage.setItem("idEmpresa", response.data.id);
+        }
       })
       .catch((error) => {
         console.error(error);
       });
   };
 
-  console.log(idEmp);
-  //guardar la id de la empresa en localstorage
-
   const handleSubmit = (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault();
     LoginValidate.validate(loginData)
       .then(() => {
-        getSuccess(JSON.stringify("validado"));
         peticionesPost();
       })
       .catch((error) => {
@@ -73,9 +80,25 @@ export const LoginPage: React.FC<{}> = () => {
       });
   };
 
+  //verificar el usuario
+  const navigate = useNavigate();
 
-
-
+  const verificarPost = async () => {
+    await axios
+      .post(URLApivalidate, loginData)
+      .then((response) => {
+        if (response.data) {
+          navigate("/home");
+          getSuccess(JSON.stringify("validado"));
+        } else {
+          navigate("/");
+          getError("Usuario no Validado");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   return (
     <Grid
@@ -114,7 +137,7 @@ export const LoginPage: React.FC<{}> = () => {
               variant="outlined"
               type="submit"
               sx={{ mt: 1.5, mb: 3 }}
-              onClick={()=> peticionesPost( )}
+              onClick={() => verificarPost()}
             >
               Iniciar sesion
             </Button>

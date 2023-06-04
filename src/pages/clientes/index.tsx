@@ -3,7 +3,18 @@ import MUIDataTable from "mui-datatables";
 import MaterialTable from "material-table";
 import axios from "axios";
 import { FormAddCliente } from "./formAddCliente";
-import { Button, Container, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, Modal } from "@mui/material";
+import {
+  Button,
+  Container,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Grid,
+  IconButton,
+  Modal,
+  Paper,
+} from "@mui/material";
 import { FormUpdateCliente } from "./formUpdateCliente";
 import { number } from "yup";
 
@@ -31,7 +42,8 @@ const columns = [
 ];
 
 const URLApi = "http://127.0.0.1:6001/getClientes";
-const id_empresa = 1; // Ajusta el valor
+const idEmpresa = localStorage.getItem('idEmpresa')!;
+const id_empresa = parseInt(idEmpresa);
 
 export const Clientes: React.FC = () => {
   //traer los datos con get
@@ -66,7 +78,7 @@ export const Clientes: React.FC = () => {
     direccion: "",
     telefono: 0,
     email: "",
-    id: 0
+    id: 0,
   });
   const [modalUpdate, setModalUpdate] = React.useState(false);
   const handleCloseUpdate = () => setModalUpdate(false);
@@ -84,24 +96,22 @@ export const Clientes: React.FC = () => {
     caso: string
   ) => {
     setClienteSeleccionado(cliente);
-    (caso === "editar")?abrirCerraModalUpdate()
-    :
-    abrirCerraModalDelete()
+    caso === "editar" ? abrirCerraModalUpdate() : abrirCerraModalDelete();
   };
 
   //modal Delete
   const [dataDelete, setDataDelete] = useState({
-    id:0,
-    id_empresa: 0
+    id: 0,
+    id_empresa: 0,
   });
 
   useEffect(() => {
     setDataDelete({
       id: clienteSeleccionado.id,
-      id_empresa: id_empresa
+      id_empresa: id_empresa,
     });
   }, [clienteSeleccionado.id, id_empresa]);
-  
+
   const [modalDelete, setModalDelete] = React.useState(false);
   const handleCloseDelete = () => setModalDelete(false);
   const abrirCerraModalDelete = () => {
@@ -109,16 +119,13 @@ export const Clientes: React.FC = () => {
   };
 
   const peticionesDelete = async () => {
-    await axios.delete("http://127.0.0.1:6001/deleteClientes", {data:dataDelete})
-      .then(response=>(
-        setData(data)
-      ))
+    await axios
+      .delete("http://127.0.0.1:6001/deleteClientes", { data: dataDelete })
+      .then((response) => setData(response.data))
       .catch((error) => {
         console.error(error);
       });
   };
-
-
 
   return (
     <Container>
@@ -146,7 +153,7 @@ export const Clientes: React.FC = () => {
             icon: "delete",
             tooltip: "Eliminar Cliente",
             onClick: (event, rowData) =>
-            seleccionarCliente(rowData, "eliminar"),
+              seleccionarCliente(rowData, "eliminar"),
           },
         ]}
         options={{
@@ -180,29 +187,67 @@ export const Clientes: React.FC = () => {
           idEmp={id_empresa}
           data={data}
           setdata={setData}
-          nombre={ clienteSeleccionado.nombre}
-          direccion={ clienteSeleccionado.direccion}
+          nombre={clienteSeleccionado.nombre}
+          direccion={clienteSeleccionado.direccion}
           telefono={clienteSeleccionado.telefono}
-          email={ clienteSeleccionado.email}
+          email={clienteSeleccionado.email}
           id={clienteSeleccionado.id}
         />
       </Modal>
-      
       <Modal
         open={modalDelete}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <div>
-           <p> Estas seguro que deseas eliminar al cliente: <b>{clienteSeleccionado&& clienteSeleccionado.nombre} </b>? </p>
-          <Button autoFocus onClick={handleCloseDelete}>
-            Cancelar
-          </Button>
-          <Button onClick={()=> peticionesDelete()}>Eliminar</Button>
-        
-        </div>
+        <Grid
+          container
+          direction="column"
+          alignItems="center"
+          justifyContent="center"
+          sx={{ minHeight: "100vh" }}
+        >
+          <Grid item>
+            <div
+              style={{
+                position: "relative",
+                width: "120vh",
+              }}
+            >
+              <Paper
+                sx={{
+                  padding: "2em",
+                  borderRadius: "0.5em",
+                  width: "120vh",
+                  backgroundColor: "rgba(31, 38, 30, 0.9)",
+                  border: "2px solid #2D392C",
+                }}
+              >
+                <p>
+                  {" "}
+                  Estas seguro que deseas eliminar al cliente :{" "}
+                  <b>
+                    {clienteSeleccionado && clienteSeleccionado.nombre}{" "}
+                  </b>? <br />
+                  <br />
+                  <b> se eliminara las mudanzas relacionas con este cliente </b>
+                </p>
+                <Button autoFocus onClick={handleCloseDelete}>
+                  Cancelar
+                </Button>
+                <Button
+                  onClick={() => {
+                    peticionesDelete();
+                    handleCloseDelete();
+                    window.location.reload();
+                  }}
+                >
+                  Eliminar
+                </Button>
+              </Paper>
+            </div>
+          </Grid>
+        </Grid>
       </Modal>
-
     </Container>
   );
 };

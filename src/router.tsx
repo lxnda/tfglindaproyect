@@ -5,6 +5,7 @@ import { LoginPage } from "./pages/login";
 import { RegisterPage } from "./pages/register";
 import { Calendar }  from "./pages/calendar";
 import { Clientes } from "./pages/clientes";
+import { Mudanzas } from "./pages/mudanzas";
 
 export const AppRouter: React.FC<{}> = () => {
   return (
@@ -14,6 +15,7 @@ export const AppRouter: React.FC<{}> = () => {
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/calendar" element={<Calendar />} />
       <Route path="/clientes" element={<Clientes/>} />
+      <Route path="/mudanzas" element={<Mudanzas/>} />
     </Routes>
   );
 };

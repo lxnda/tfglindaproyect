@@ -23,6 +23,7 @@ import Logo from "../../assets/images/Logo.png";
 import MenuUser from "./menuUser";
 import { HeaderComponent } from "..";
 import Menuhome from "../../pages/menu/home";
+import { Clientes } from "../../pages/clientes";
 
 const drawerWidth = 240;
 
@@ -152,9 +153,9 @@ export const Menu: React.FC<{}> = () => {
       </Drawer>
       <DrawerHeader />
       <Box component="main" sx={{ flexGrow: 1,p:2.5,overflow: 'hidden' }}>
-        <HeaderComponent title="Mudanzas Proximas" />
+        {/* <HeaderComponent title="Mudanzas Proximas" /> */}
 
-        <Menuhome></Menuhome> 
+        <Clientes/> 
       </Box>
     </Box>
   );
