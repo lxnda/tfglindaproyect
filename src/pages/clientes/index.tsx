@@ -128,7 +128,7 @@ export const Clientes: React.FC = () => {
   };
 
   return (
-    <Container>
+    <Container sx={{ flexGrow: 1, overflow: "hidden" , paddingTop: "25px" }}>
       <br />
       <Button
         onClick={handleOpen}

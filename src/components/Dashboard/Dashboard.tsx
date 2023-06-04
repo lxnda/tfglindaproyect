@@ -21,9 +21,7 @@ import * as React from "react";
 import { Avatar } from "@mui/material";
 import Logo from "../../assets/images/Logo.png";
 import MenuUser from "./menuUser";
-import { HeaderComponent } from "..";
-import Menuhome from "../../pages/menu/home";
-import { Clientes } from "../../pages/clientes";
+import { ReactNode } from "react";
 
 const drawerWidth = 240;
 
@@ -94,8 +92,11 @@ const Drawer = styled(MuiDrawer, {
     "& .MuiDrawer-paper": closedMixin(theme),
   }),
 }));
+interface Props {
+  content: ReactNode;
+}
 
-export const Menu: React.FC<{}> = () => {
+const Dashboard: React.FC<Props> = ({ content }) => {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -142,21 +143,46 @@ export const Menu: React.FC<{}> = () => {
         </DrawerHeader>
         <Divider />
         <List>
-          <Item text="Home" icon={<HomeIcon />} open={open} To="../pages/Dashboard/HomeDashboard"/>
-          <Item text="Clientes" icon={<PeopleAltIcon />} open={open} To="../home"/>
-          <Item text="Mudanzas" icon={<LocalShippingIcon />} open={open} To="../home"/>
-          <Item text="Calendario" icon={<TodayIcon />} open={open} To="../home"/>
-          <Item text="Facturas" icon={<ReceiptIcon />} open={open} To="../home"/>
+          <Item
+            text="Home"
+            icon={<HomeIcon />}
+            open={open}
+            To="/home"
+          />
+          <Item
+            text="Clientes"
+            icon={<PeopleAltIcon />}
+            open={open}
+            To="/clientes"
+          />
+          <Item
+            text="Mudanzas"
+            icon={<LocalShippingIcon />}
+            open={open}
+            To="/mudanzas"
+          />
+          <Item
+            text="Calendario"
+            icon={<TodayIcon />}
+            open={open}
+            To="/calendario"
+          />
+          <Item
+            text="Facturas"
+            icon={<ReceiptIcon />}
+            open={open}
+            To="/facturas"
+          />
         </List>
         <Divider />
         <MenuUser open={open} />
       </Drawer>
       <DrawerHeader />
-      <Box component="main" sx={{ flexGrow: 1,p:2.5,overflow: 'hidden' }}>
-        {/* <HeaderComponent title="Mudanzas Proximas" /> */}
-
-        <Clientes/> 
+      <Box component="main" sx={{ flexGrow: 1, p: 2.5, overflow: "hidden"}}>
+        {content}
       </Box>
     </Box>
   );
 };
+
+export default Dashboard;

@@ -4,6 +4,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Available Scripts
 
+## `yarn install`
+para instalar package json config 
+
+
 In the project directory, you can run:
 
 ### `yarn start`

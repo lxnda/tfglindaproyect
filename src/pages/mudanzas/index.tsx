@@ -57,7 +57,7 @@ const columns = [
 ];
 
 const URLApi = "http://127.0.0.1:6001/getMudanzas";
-const idEmpresa = localStorage.getItem('idEmpresa')!;
+const idEmpresa = localStorage.getItem("idEmpresa")!;
 const id_empresa = parseInt(idEmpresa);
 
 export const Mudanzas: React.FC = () => {
@@ -151,8 +151,7 @@ export const Mudanzas: React.FC = () => {
   };
 
   return (
-    <Container>
-      <br />
+    <Container sx={{ flexGrow: 1, overflow: "hidden", paddingTop: "50px" }}>
       <Button
         onClick={handleOpen}
         variant="contained"

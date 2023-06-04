@@ -30,7 +30,7 @@ const URLApi = "http://127.0.0.1:6001/addUser";
 
 export const RegisterPage: React.FC<{}> = () => {
   const { getError, getSuccess } = useNotification();
-  const [loginData, setLoginData] = React.useState<LoginType>({
+  const [registerData, setRegisterData] = React.useState<LoginType>({
     email: "",
     nombre: "",
     direccion: "",
@@ -40,16 +40,16 @@ export const RegisterPage: React.FC<{}> = () => {
 
   const handlechange=(e: { target: { name: any; value: any; }; })=>{
     const {name,value}=e.target;
-    setLoginData(prevState=>({
+    setRegisterData(prevState=>({
       ...prevState,
       [name]:value
     }));
-    console.log(loginData);
+    console.log(registerData);
   }
 
   const handleSubmit = (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault();
-    LoginValidate.validate(loginData)
+    LoginValidate.validate(registerData)
       .then(() => {
         getSuccess(JSON.stringify("Usuario validado"));
       })
@@ -60,7 +60,7 @@ export const RegisterPage: React.FC<{}> = () => {
 
   //enviar los datos 
   const peticionesPost = async () => {
-    await axios.post(URLApi, loginData)
+    await axios.post(URLApi, registerData)
       .then(response=>(
         console.log(response)
       ))

@@ -1,5 +1,6 @@
+import { Container } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import * as React from 'react';
+import * as React from "react";
 
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID", width: 70 },
@@ -89,14 +90,15 @@ const rows = [
 
 export const Menuhome: React.FC<{}> = () => {
   return (
-    <DataGrid
-      sx={{ height: "75vh" }}
-      rows={rows}
-      columns={columns}
-      pagination
-      checkboxSelection
-    />
+    <Container sx={{ flexGrow: 1, overflow: "hidden", paddingTop: "50px" }}>
+      <DataGrid
+        sx={{ height: "75vh" }}
+        rows={rows}
+        columns={columns}
+        pagination
+        checkboxSelection
+      />
+    </Container>
   );
 };
 export default Menuhome;
-

@@ -1,23 +1,17 @@
 import {
   Box,
   Button,
-  Container,
   Grid,
   Link,
   Paper,
-  Stack,
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import { useNotification } from "../../context/notification.context";
+import React from "react";
 import { LoginValidate } from "../../utils/validateForms";
-import { BrowserRouter, NavLink } from "react-router-dom";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import ReactPlayer from "react-player";
-import zIndex from "@mui/material/styles/zIndex";
-import "./Player.css";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useNotification } from "../../context/notification.context";
 
 type LoginType = {
   email: string;
@@ -88,7 +82,7 @@ export const LoginPage: React.FC<{}> = () => {
       .post(URLApivalidate, loginData)
       .then((response) => {
         if (response.data) {
-          navigate("/home");
+          navigate("/clientes");
           getSuccess(JSON.stringify("validado"));
         } else {
           navigate("/");
