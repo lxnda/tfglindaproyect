@@ -6,10 +6,6 @@ import { FormAddCliente } from "./formAddCliente";
 import {
   Button,
   Container,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
   Grid,
   IconButton,
   Modal,
@@ -63,6 +59,7 @@ export const Clientes: React.FC = () => {
       });
   };
 
+   console.log(data)
   useEffect(() => {
     peticionesGet();
   }, []);

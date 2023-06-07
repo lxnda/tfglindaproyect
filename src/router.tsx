@@ -7,7 +7,7 @@ import { Clientes } from "./pages/clientes";
 import { Mudanzas } from "./pages/mudanzas";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Menuhome from "./pages/home/home";
-import Facturas from "./pages/factura/factura";
+import {Facturas} from "./pages/factura/factura";
 
 export const AppRouter: React.FC<{}> = () => {
   return (
