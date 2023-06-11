@@ -18,6 +18,9 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+
+import bgLogin from "../../assets/images/bglogin.jpg";
+
 import { useNotification } from "../../context/notification.context";
 
 type RegisterType = {
@@ -149,21 +152,24 @@ export const RegisterPage: React.FC<{}> = () => {
   };
 
   return (
-    <Container maxWidth="sm">
       <Grid
         container
         direction="column"
         alignItems="center"
         justifyContent="center"
-        sx={{ minHeight: "100vh" }}
+        sx={{ minHeight: "100vh",
+        backgroundImage: `url(${bgLogin})`,
+        boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.25)", }}
       >
-        <Grid item>
-          <Paper  sx={{
+        <Grid item width="90vh">
+          <Paper
+            sx={{
               padding: "1.2em",
               borderRadius: "0.5em",
               border: "2px solid #C6FFC1",
               boxShadow: "0 0 8px #C6FFC1",
-            }}>
+            }}
+          >
             <Typography sx={{ mt: 1, mb: 1 }} variant="h4">
               Crear Cuenta
             </Typography>
@@ -259,68 +265,68 @@ export const RegisterPage: React.FC<{}> = () => {
               </NavLink>
             </Box>
           </Paper>
-        </Grid>
-      </Grid>
-      <Dialog
-        open={termsModalOpen}
-        onClose={handleTermsModalClose}
-        PaperProps={{
-          sx: {
-            backgroundColor: "#1D211D",
-            border: "2px solid #C6FFC1",
-            boxShadow: "0 0 8px #C6FFC1",
-            opacity: 0.9,
-            color: "white",
-          },
-        }}
-      >
-        <DialogTitle>Términos de privacidad</DialogTitle>
-        <DialogContent>
-          <DialogContentText sx={{ color: "white" }}>
-            Nuestra prioridad es proteger tu información personal. A
-            continuación, se presentan los puntos clave de nuestra política de
-            privacidad: <br />
-            <br />
-            <b>Recopilación de información:</b> Podemos recopilar información
-            personal que nos proporcionas al utilizar nuestros servicios. <br />
-            <br />
-            <b>Uso de la información:</b> Utilizamos tu información para
-            brindarte nuestros servicios y mejorar tu experiencia como usuario.{" "}
-            <br />
-            <br />
-            <b>Protección de la información:</b> Implementamos medidas de
-            seguridad para proteger tus datos personales y prevenir su acceso no
-            autorizado. <br />
-            <br />
-            <b>Compartir información:</b> No compartimos tu información personal
-            con terceros, excepto cuando sea necesario para brindarte nuestros
-            servicios o cumplir con la ley. <br />
-            <br />
-            <b>Tus derechos:</b> Tienes derecho a acceder, corregir y eliminar
-            tus datos personales. Puedes contactarnos para ejercer estos
-            derechos. <br />
-            <br />
-            <b>Cambios en la política:</b> Podemos actualizar nuestra política
-            de privacidad. <br />
-            <br />
-            Te notificaremos sobre cualquier cambio relevante. <br />
-            Si tienes alguna pregunta o inquietud sobre nuestra política de
-            privacidad, no dudes en contactarnos.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button
-            onClick={handleTermsModalClose}
-            sx={{
-              color: "white",
-              backgroundColor: "#798B78",
-              border: "2px solid #798B78",
+          <Dialog
+            open={termsModalOpen}
+            onClose={handleTermsModalClose}
+            PaperProps={{
+              sx: {
+                backgroundColor: "#1D211D",
+                border: "2px solid #C6FFC1",
+                boxShadow: "0 0 8px #C6FFC1",
+                opacity: 0.9,
+                color: "white",
+              },
             }}
           >
-            Cerrar
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </Container>
+            <DialogTitle>Términos de privacidad</DialogTitle>
+            <DialogContent>
+              <DialogContentText sx={{ color: "white" }}>
+                Nuestra prioridad es proteger tu información personal. A
+                continuación, se presentan los puntos clave de nuestra política
+                de privacidad: <br />
+                <br />
+                <b>Recopilación de información:</b> Podemos recopilar
+                información personal que nos proporcionas al utilizar nuestros
+                servicios. <br />
+                <br />
+                <b>Uso de la información:</b> Utilizamos tu información para
+                brindarte nuestros servicios y mejorar tu experiencia como
+                usuario. <br />
+                <br />
+                <b>Protección de la información:</b> Implementamos medidas de
+                seguridad para proteger tus datos personales y prevenir su
+                acceso no autorizado. <br />
+                <br />
+                <b>Compartir información:</b> No compartimos tu información
+                personal con terceros, excepto cuando sea necesario para
+                brindarte nuestros servicios o cumplir con la ley. <br />
+                <br />
+                <b>Tus derechos:</b> Tienes derecho a acceder, corregir y
+                eliminar tus datos personales. Puedes contactarnos para ejercer
+                estos derechos. <br />
+                <br />
+                <b>Cambios en la política:</b> Podemos actualizar nuestra
+                política de privacidad. <br />
+                <br />
+                Te notificaremos sobre cualquier cambio relevante. <br />
+                Si tienes alguna pregunta o inquietud sobre nuestra política de
+                privacidad, no dudes en contactarnos.
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button
+                onClick={handleTermsModalClose}
+                sx={{
+                  color: "white",
+                  backgroundColor: "#798B78",
+                  border: "2px solid #798B78",
+                }}
+              >
+                Cerrar
+              </Button>
+            </DialogActions>
+          </Dialog>
+        </Grid>
+      </Grid>
   );
 };

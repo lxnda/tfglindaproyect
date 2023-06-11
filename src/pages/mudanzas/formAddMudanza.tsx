@@ -93,80 +93,86 @@ export const FormAddMudanza: React.FC<FormAddMudanzaProps> = ({
             >
               Añadir Mudanza
             </Typography>
-
-            <Box component="form">
-              <TextField
-                name="fecha"
-                margin="normal"
-                label="Fecha"
-                fullWidth
-                type="date"
-                sx={{ mt: 2, mb: 1.5 }}
-                onChange={handlechange}
-              />
-              <TextField
-                name="direccion_origen"
-                margin="normal"
-                label="Direccion Origen"
-                fullWidth
-                type="text"
-                sx={{ mt: 2, mb: 1.5 }}
-                onChange={handlechange}
-              />
-              <TextField
-                name="direccion_destino"
-                margin="normal"
-                label="Direccion Destino"
-                fullWidth
-                type="text"
-                sx={{ mt: 2, mb: 1.5 }}
-                onChange={handlechange}
-              />
-              <TextField
-                name="tipo"
-                margin="normal"
-                label="Tipo de Mudanza"
-                fullWidth
-                type="text"
-                sx={{ mt: 2, mb: 1.5 }}
-                onChange={handlechange}
-              />
-              <TextField
-                name="descripcion"
-                margin="normal"
-                label="Decripcion de Mudanza"
-                fullWidth
-                type="text"
-                sx={{ mt: 2, mb: 1.5 }}
-                onChange={handlechange}
-              />
-              <TextField
-                name="id_cliente"
-                margin="normal"
-                label="ID del Cliente"
-                fullWidth
-                type="text"
-                sx={{ mt: 2, mb: 1.5 }}
-                onChange={handlechange}
-              />
-              <TextField
-                name="total_mudanza"
-                margin="normal"
-                label="Total Mudanza"
-                fullWidth
-                type="number"
-                sx={{ mt: 2, mb: 1.5 }}
-                onChange={handlechange}
-              />
-              <Button
-                onClick={() => peticionesPost()}
-                fullWidth
-                variant="outlined"
-                type="submit"
-                sx={{ mt: 1.5, mb: 3 }}
-              >
-                Añadir Mudanza
-              </Button>
+            <Box
+              style={{
+                maxHeight: "calc(100vh - 200px)", // Ajusta la altura máxima según tus necesidades
+                overflowY: "auto",
+              }}
+            >
+              <Box component="form">
+                <TextField
+                  name="fecha"
+                  margin="normal"
+                  label="Fecha"
+                  fullWidth
+                  type="date"
+                  sx={{ mt: 2, mb: 1 }}
+                  onChange={handlechange}
+                />
+                <TextField
+                  name="direccion_origen"
+                  margin="normal"
+                  label="Direccion Origen"
+                  fullWidth
+                  type="text"
+                  sx={{ mt: 2, mb: 1 }}
+                  onChange={handlechange}
+                />
+                <TextField
+                  name="direccion_destino"
+                  margin="normal"
+                  label="Direccion Destino"
+                  fullWidth
+                  type="text"
+                  sx={{ mt: 2, mb: 1 }}
+                  onChange={handlechange}
+                />
+                <TextField
+                  name="tipo"
+                  margin="normal"
+                  label="Tipo de Mudanza"
+                  fullWidth
+                  type="text"
+                  sx={{ mt: 2, mb: 1 }}
+                  onChange={handlechange}
+                />
+                <TextField
+                  name="descripcion"
+                  margin="normal"
+                  label="Decripcion de Mudanza"
+                  fullWidth
+                  type="text"
+                  sx={{ mt: 2, mb: 1 }}
+                  onChange={handlechange}
+                />
+                <TextField
+                  name="id_cliente"
+                  margin="normal"
+                  label="ID del Cliente"
+                  fullWidth
+                  type="text"
+                  sx={{ mt: 2, mb: 1 }}
+                  onChange={handlechange}
+                />
+                <TextField
+                  name="total_mudanza"
+                  margin="normal"
+                  label="Total Mudanza"
+                  fullWidth
+                  type="number"
+                  sx={{ mt: 2, mb: 1.5 }}
+                  onChange={handlechange}
+                />
+                <Button
+                  onClick={() => peticionesPost()}
+                  fullWidth
+                  variant="outlined"
+                  type="submit"
+                  sx={{ mt: 1.5, mb: 3 }}
+                >
+                  Añadir Mudanza
+                </Button>
+              </Box>
             </Box>
           </Paper>
         </div>

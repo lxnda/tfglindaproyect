@@ -1,23 +1,49 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Fullcalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import { Container } from "@mui/material";
+import axios from "axios";
+
+const URLApi = "http://127.0.0.1:6001/getEvents";
+const idEmpresa = localStorage.getItem('idEmpresa')!;
+const id_empresa = parseInt(idEmpresa);
+
+type DataType = {
+  nombre: string;
+  fecha: string;
+};
 
 export const Calendar: React.FC = () => {
-  // Arreglo de eventos
-  const events = [
-    {
-      title: "Evento 1",
-      start: "2023-06-01",
-    },
-    {
-      title: "Evento 2",
-      start: "2023-06-05",
-    },
-    // Agrega más eventos según sea necesario
-  ];
+  //traer los datos con get
+  const [data, setData] = useState<DataType[]>([]); 
+  const peticionesGet = async () => {
+    await axios
+      .get(URLApi, {
+        params: {
+          id_empresa: id_empresa,
+        },
+      })
+      .then((response) => {
+        setData(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+   console.log(data)
+  useEffect(() => {
+    peticionesGet();
+  }, []);
+
+  const formattedEvents = data.map((data) => ({
+    title: data.nombre,
+    start: data.fecha, 
+  }));
+
+  
 
   // Opciones de personalización del calendario
   const calendarOptions = {
@@ -29,7 +55,7 @@ export const Calendar: React.FC = () => {
       end: "dayGridMonth, timeGridWeek, timeGridDay",
     },
     height: "auto",
-    events: events,
+    events: formattedEvents,
     eventColor: "#C6FFC1", // Color de los eventos sin especificar color individualmente
     eventTextColor: "black", // Color del texto de los eventos
     eventBorderColor: "black", // Color del borde de los eventos

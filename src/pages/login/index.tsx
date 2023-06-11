@@ -12,6 +12,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import bgLogin from "../../assets/images/bglogin.jpg";
 
 type LoginType = {
   email: string;
@@ -70,10 +71,12 @@ export const LoginPage: React.FC<{}> = () => {
     LoginValidate.validate(loginData)
       .then(() => {
         peticionesPost();
+        localStorage.setItem("authenticated", "true");
       })
       .catch((error) => {
         setErrors({ validate: true });
         getError(error.message);
+        localStorage.setItem("authenticated", "false");
       });
   };
 
@@ -101,7 +104,11 @@ export const LoginPage: React.FC<{}> = () => {
       direction="column"
       alignItems="center"
       justifyContent="center"
-      sx={{ minHeight: "100vh" }}
+      sx={{
+        minHeight: "100vh",
+        backgroundImage: `url(${bgLogin})`,
+        boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.25)",
+      }}
     >
       <Grid item>
         <Paper
@@ -168,11 +175,6 @@ export const LoginPage: React.FC<{}> = () => {
               Iniciar sesión
             </Button>
             <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  ¿Olvidaste tu contraseña?
-                </Link>
-              </Grid>
               <Grid item>
                 <NavLink to="/register">
                   <Link variant="body2">¿No tienes una cuenta? Regístrate</Link>

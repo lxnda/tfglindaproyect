@@ -5,11 +5,11 @@ import {
   Button,
   Container,
   Grid,
-  IconButton,
   Modal,
   Paper,
 } from "@mui/material";
 import { FormAddFactura } from "./addFactura";
+import PrintIcon from '@mui/icons-material/Print';
 
 const columns = [
   {
@@ -23,6 +23,10 @@ const columns = [
   {
     title: "Fecha",
     field: "fecha",
+  },
+  {
+    title: "Descripcion",
+    field: "descripcion",
   },
   {
     title: "Total €",
@@ -68,28 +72,118 @@ export const Facturas: React.FC = () => {
     fecha: "",
     nombrecliente: "",
     total: 0,
+    descripcion: "",
     id: 0,
     idfactura:""
   });
-  const [modalUpdate, setModalUpdate] = React.useState(false);
-  const handleCloseUpdate = () => setModalUpdate(false);
-  const abrirCerraModalUpdate = () => {
-    setModalUpdate(!modalUpdate);
-  };
+  
   const seleccionarFactura = (
     factura: React.SetStateAction<{
       fecha: string;
       nombrecliente: string;
       total: number;
+      descripcion: string;
       id: number;
       idfactura:string;
     }>,
     caso: string
   ) => {
     setFacturaSeleccionada(factura);
-    caso === "editar" ? abrirCerraModalUpdate() : abrirCerraModalDelete();
+    caso === "imprimir" ? handleImprimirFactura(factura) : abrirCerraModalDelete();
   };
 
+
+  //Imprimir Factura
+  const handleImprimirFactura = (factura: any) => {
+    const printWindow = window.open("", "_blank");
+    if (printWindow) {
+      printWindow.document.write(
+        "<html><head><title>Factura</title></head><body>"
+      );
+
+      // Estilos personalizados para la impresión
+      printWindow.document.write(`
+        <style>
+          /* Estilos personalizados para la impresión */
+          body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+          }
+          .factura-container {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 20px;
+            width: 300px;
+            margin: 0 auto;
+          }
+          .factura-header {
+            text-align: center;
+            margin-bottom: 10px;
+          }
+          .factura-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 5px;
+          }
+          .factura-data {
+            margin-bottom: 10px;
+          }
+          .factura-row {
+            display: flex;
+            justify-content: space-between;
+          }
+          .factura-total {
+            margin-top: 20px;
+            text-align: right;
+            font-weight: bold;
+          }
+        </style>
+      `);
+
+      // Contenido de la factura
+      printWindow.document.write('<div class="factura-container">');
+      printWindow.document.write('<div class="factura-header">');
+      printWindow.document.write(
+        `<h2 class="factura-title">Factura ${factura.idfactura}</h2>`
+      );
+      printWindow.document.write(`<p><b>Nombre Cliente:</b>${factura.nombrecliente}</p>`);
+      printWindow.document.write(`<p>About Moving</p>`);
+      printWindow.document.write("</div>");
+      printWindow.document.write('<div class="factura-data">');
+      printWindow.document.write(`<p>Fecha: ${factura.fecha}</p>`);
+
+      // Detalles de la factura
+      printWindow.document.write("<table>");
+      printWindow.document.write(
+        "<tr><th>Descripción</th></tr>"
+      );
+
+
+      printWindow.document.write(
+          `<tr><td>${factura.descripcion}</td><td>`
+        );
+
+      printWindow.document.write("</table>");
+
+      // Cálculo del IVA
+      const iva = factura.total * 0.21;
+      const totalConIva = factura.total + iva;
+
+      printWindow.document.write(`<div class="factura-total">`);
+      printWindow.document.write(`<p>Subtotal: $${factura.total.toFixed(2)}</p>`);
+      printWindow.document.write(`<p>IVA (21%): $${iva.toFixed(2)}</p>`);
+      printWindow.document.write(`<p>Total: $${totalConIva.toFixed(2)}</p>`);
+      printWindow.document.write("</div>");
+
+      printWindow.document.write("</div>");
+
+      printWindow.document.write("</body></html>");
+      printWindow.document.close();
+      printWindow.print();
+    }
+  };
+  
   //modal Delete
   const [dataDelete, setDataDelete] = useState({
     id: 0,
@@ -133,10 +227,10 @@ export const Facturas: React.FC = () => {
         columns={columns}
         actions={[
           {
-            icon: "edit",
-            tooltip: "Editar Factura",
+            icon: PrintIcon,
+            tooltip: "Imprimir Factura",
             onClick: (event, rowData: any) =>
-              seleccionarFactura(rowData, "editar"),
+            seleccionarFactura(rowData, "imprimir"),
           },
           {
             icon: "delete",

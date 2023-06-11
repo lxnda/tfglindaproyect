@@ -9,6 +9,8 @@ enum themePallette {
   BG = "#1f2029",
   LIME = "#C6FFC1",
   FONT_GLOBAL = "'JetBrains Mono', monospace",
+  FONT_ROBOTO_MONO = "'Roboto Mono', monospace",
+  FONT_IBM_PLEX_MONO = "'IBM Plex Mono', monospace",
   //alert styles
   ERROR_MAIN = "#f44336",
   BG_ERROR_MAIN = "rgba(224,67,54,9.1",
@@ -26,7 +28,7 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: themePallette.FONT_GLOBAL,
+    fontFamily:`${themePallette.FONT_GLOBAL}, ${themePallette.FONT_ROBOTO_MONO}, ${themePallette.FONT_IBM_PLEX_MONO}, monospace`,
   },
   components: {
     MuiButton: {

@@ -7,11 +7,19 @@ import {
 } from "@mui/icons-material";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import PersonPinIcon from "@mui/icons-material/PersonPin";
+import { useNavigate } from "react-router-dom";
+import { Modal } from "@material-ui/core";
+import { Infouser } from "./infouser";
 interface Props {
   open?: boolean;
 }
 
+
 function MenuUser({ open }: Props) {
+  const [openinfo, setOpeninfo] = React.useState(false);
+  const handleOpen = () => setOpeninfo(true);
+  const handleClose = () => setOpeninfo(false);
+
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleMenuClick = (event: any) => {
@@ -20,6 +28,14 @@ function MenuUser({ open }: Props) {
 
   const handleMenuClose = () => {
     setAnchorEl(null);
+  };
+
+  const navigate = useNavigate();
+
+  const cerrarsession = () => {
+    localStorage.setItem("idEmpresa", "0");
+    localStorage.setItem("authenticated", "false");
+    navigate("/");
   };
 
   return (
@@ -59,12 +75,12 @@ function MenuUser({ open }: Props) {
           }}
         >
           Usuario
-            <ArrowDropUpIcon
-              sx={{
-                fontSize: 20,
-                color: "white",
-              }}
-            />
+          <ArrowDropUpIcon
+            sx={{
+              fontSize: 20,
+              color: "white",
+            }}
+          />
         </Typography>
       </Button>
       <Menu
@@ -79,16 +95,21 @@ function MenuUser({ open }: Props) {
           vertical: "bottom",
           horizontal: "left",
         }}
+        
       >
-        <MenuItem>
+        <MenuItem onClick={handleOpen}>
           <SettingsIcon sx={{ mr: 1 }} />
           Configuración
         </MenuItem>
-        <MenuItem>
+        <MenuItem onClick={cerrarsession}>
           <ExitToAppIcon sx={{ mr: 1 }} />
           Salir
         </MenuItem>
       </Menu>
+
+      <Modal open={openinfo}>
+        <Infouser onClose={handleClose} />
+      </Modal>
     </div>
   );
 }

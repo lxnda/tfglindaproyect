@@ -32,6 +32,8 @@ const openedMixin = (theme: Theme): CSSObject => ({
     duration: theme.transitions.duration.enteringScreen,
   }),
   overflowX: "hidden",
+  backgroundImage: "linear-gradient(to right, #698767, #2B392A)",
+  boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.25)",
 });
 
 const closedMixin = (theme: Theme): CSSObject => ({
@@ -44,6 +46,8 @@ const closedMixin = (theme: Theme): CSSObject => ({
   [theme.breakpoints.up("sm")]: {
     width: `calc(${theme.spacing(8)} + 1px)`,
   },
+  backgroundImage: "linear-gradient(to right, #698767, #2B392A)",
+  boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.25)",
 });
 
 const DrawerHeader = styled("div")(({ theme }) => ({
@@ -111,7 +115,14 @@ const Dashboard: React.FC<Props> = ({ content }) => {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
+      <AppBar
+        position="fixed"
+        open={open}
+        sx={{
+          backgroundImage: "linear-gradient(to right, #2B392A ,#698767)",
+          boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.25)",
+        }}
+      >
         <Toolbar>
           <IconButton
             color="inherit"
@@ -130,9 +141,22 @@ const Dashboard: React.FC<Props> = ({ content }) => {
           </Typography>
         </Toolbar>
       </AppBar>
-      <Drawer variant="permanent" open={open}>
-        <DrawerHeader>
-          <Avatar variant="square" src={Logo} sizes="" />
+      <Drawer
+        variant="permanent"
+        open={open}
+        sx={{
+          backgroundImage: "linear-gradient(to right, #2B392A ,#698767)",
+          boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.25)",
+        }}
+      >
+        <DrawerHeader
+          sx={{
+            height: "50px",
+            backgroundImage: "linear-gradient(to right, #698767, #2B392A)",
+            boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.25)",
+          }}
+        >
+          <Avatar variant="square" src={Logo} sizes="50px" />
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === "rtl" ? (
               <ChevronRightIcon />
@@ -143,12 +167,7 @@ const Dashboard: React.FC<Props> = ({ content }) => {
         </DrawerHeader>
         <Divider />
         <List>
-          <Item
-            text="Home"
-            icon={<HomeIcon />}
-            open={open}
-            To="/home"
-          />
+          <Item text="Home" icon={<HomeIcon />} open={open} To="/home" />
           <Item
             text="Clientes"
             icon={<PeopleAltIcon />}
@@ -177,8 +196,7 @@ const Dashboard: React.FC<Props> = ({ content }) => {
         <Divider />
         <MenuUser open={open} />
       </Drawer>
-      <DrawerHeader />
-      <Box component="main" sx={{ flexGrow: 1, p: 2.5, overflow: "hidden"}}>
+      <Box component="main" sx={{ flexGrow: 1, p: 2.5, overflow: "hidden" }}>
         {content}
       </Box>
     </Box>

@@ -18,6 +18,7 @@ export const FormAddFactura: React.FC<FormAddFacturaProps> = ({ onClose, idEmp, 
     fecha: "",
     total: "",
     nombrecliente: "",
+    descripcion: "",
     idempresa: idEmp//el id ya esta predefinido
   });
 
@@ -115,6 +116,15 @@ export const FormAddFactura: React.FC<FormAddFacturaProps> = ({ onClose, idEmp, 
                 label="Total"
                 fullWidth
                 type="number"
+                sx={{ mt: 2, mb: 1.5 }}
+                onChange={handlechange}
+              />
+              <TextField
+                name="descripcion"
+                margin="normal"
+                label="Descripcion"
+                fullWidth
+                type="text"
                 sx={{ mt: 2, mb: 1.5 }}
                 onChange={handlechange}
               />
